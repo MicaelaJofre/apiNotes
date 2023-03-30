@@ -1,0 +1,27 @@
+{
+  "name": "api-notes",
+  "version": "1.0.0",
+  "description": "Api para app de notas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Micaela Jofre",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "standard": "^17.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },  
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/standard/eslintrc.json",
+      "next/core-web-vitals"
+    ]
+  }
+}
