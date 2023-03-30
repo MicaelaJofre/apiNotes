@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 
-const notes = [
+app.use(express.json())
+
+let notes = [
   {
     id: 1,
     content: 'HTML is easy',
@@ -23,25 +25,39 @@ const notes = [
 ]
 
 app.get('/api/notes', (req, resp) => {
-  resp.send(JSON.stringify(notes))
+  resp.json(notes)
+})
+
+app.get('/api/notes/:id', (req, resp) => {
+  const id = Number(req.params.id)
+  const note = notes.find(note => note.id === id)
+  resp.json(note)
 })
 
 app.delete('/api/notes/:id', (req, resp) => {
-  const { id } = Number(req.params.id)
-  //const newNotes = notes.find(note=>note.id !== id)
-  //notes = [...notes, newNotes]
+  const id = Number(req.params.id)
+  notes = notes.filter(note => note.id !== id)
+
   resp.status(204).end()
 })
 
 app.post('/api/notes',(req,resp)=>{
   const body = req.body
-  // const newNote = {
-  //   id: notes.length + 1,
-  //   content: body.content,
-  //   date: new Date(),
-  //   completed: false
-  // }
-  // notes = [...notes, newNote]
+
+  if(!body.content){
+    return response.status(400).json({ 
+      error: 'content missing' 
+    })
+  }
+
+  const newNote = {
+    id: notes.length + 1,
+    content: body.content,
+    date: new Date(),
+    completed: body.completed || false 
+  }
+  
+  notes = notes.concat(newNote)
 
   resp.status(200).json(notes)
 })
