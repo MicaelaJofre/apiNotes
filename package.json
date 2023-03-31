@@ -16,12 +16,18 @@
     "standard": "^17.0.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2"
-  },  
+  },
   "eslintConfig": {
     "extends": [
-      "./node_modules/standard/eslintrc.json",
-      "next/core-web-vitals"
-    ]
+      "./node_modules/standard/eslintrc.json"
+    ],
+    "env": {
+      "node": true,
+      "es2021": true,
+      "browser": true
+    }
   }
 }
+
